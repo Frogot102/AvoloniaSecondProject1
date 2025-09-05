@@ -9,5 +9,13 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="AvoloniaSecondProject1">
 
+	<DataGrid ItemsSource="{Binding Users}" IsReadOnly="True" DoubleTapped="DataGrid_DoubleTapped" Name="MainDataGridUsers">
+		<DataGrid.Columns>
+			<DataGridTextColumn Header="User Id" Binding="{Binding IdUser}"/>
+			<DataGridTextColumn Header="Full Name" Binding="{Binding FullName}"/>
+			<DataGridTextColumn Header="Phone Numbers" Binding="{Binding PhoneNumber}"/>
+			<DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+		</DataGrid.Columns>
+	</DataGrid>
 
 </Window>

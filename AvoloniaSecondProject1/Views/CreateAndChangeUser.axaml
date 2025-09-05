@@ -1,0 +1,18 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AvoloniaSecondProject1.CreateAndChangeUser"
+        Title="CreateAndChangeUser">
+	
+	<Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto">
+		<TextBlock Text="ФИО:" Grid.Row="0"/>
+		<TextBox Grid.Row="1" Name="FullNameText"/>
+		<TextBlock Text="Номер телефона:" Grid.Row="2"/>
+		<TextBox Grid.Row="4" Name="PhoneNumberText"/>
+		<TextBlock Text="Описание:" Grid.Row="5" />
+		<TextBox Grid.Row="6" Name="DescriptionText"/>
+		<Button Name="SaveUserButton" Grid.Row="7" Content="Save" Margin="10" Click="Button_Click" />
+	</Grid>
+</Window>
