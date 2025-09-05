@@ -8,8 +8,8 @@
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="AvoloniaSecondProject1">
-
-	<DataGrid ItemsSource="{Binding Users}" IsReadOnly="True" DoubleTapped="DataGrid_DoubleTapped" Name="MainDataGridUsers">
+	<Grid RowDefinitions="*, Auto">
+		<DataGrid ItemsSource="{Binding Users}" IsReadOnly="True" DoubleTapped="DataGrid_DoubleTapped" Name="MainDataGridUsers" Grid.Row="0">
 		<DataGrid.Columns>
 			<DataGridTextColumn Header="User Id" Binding="{Binding IdUser}"/>
 			<DataGridTextColumn Header="Full Name" Binding="{Binding FullName}"/>
@@ -17,5 +17,8 @@
 			<DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
 		</DataGrid.Columns>
 	</DataGrid>
+	<Button Content="Добавление" Grid.Row="1" Click="Button_Click"/>
+	</Grid>
+	
 
 </Window>

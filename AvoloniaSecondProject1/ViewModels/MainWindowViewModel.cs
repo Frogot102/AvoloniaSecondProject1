@@ -17,6 +17,7 @@ namespace AvoloniaSecondProject1.ViewModels
         {
             var UsersFromDb = App.DbContext.Users.ToList();
             Users = UsersFromDb;
+            OnPropertyChanged(nameof(Users));
         }
 
     }

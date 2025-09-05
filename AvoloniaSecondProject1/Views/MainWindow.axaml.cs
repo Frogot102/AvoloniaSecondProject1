@@ -13,7 +13,7 @@ namespace AvoloniaSecondProject1.Views
             DataContext = new MainWindowViewModel();
         }
 
-        private void DataGrid_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs e)
+        private async void DataGrid_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs e)
         {
             var selectedUser = MainDataGridUsers.SelectedItem as User;
 
@@ -22,10 +22,22 @@ namespace AvoloniaSecondProject1.Views
             UserVaribleData.selectedUserInMainWindow = selectedUser;
 
             var createAndChangeUserWindow = new CreateAndChangeUser();
-            createAndChangeUserWindow.ShowDialog(this);
+            await createAndChangeUserWindow.ShowDialog(this);
 
+            var viewModel = DataContext as MainWindowViewModel;
+            viewModel.RefreshData();
 
+        }
 
+        private async void Button_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            UserVaribleData.selectedUserInMainWindow = null;
+
+            var createAndChangeUserWindow = new CreateAndChangeUser();
+            await createAndChangeUserWindow.ShowDialog(this);
+
+            var viewModel = DataContext as MainWindowViewModel;
+            viewModel.RefreshData();
         }
     }
 }
