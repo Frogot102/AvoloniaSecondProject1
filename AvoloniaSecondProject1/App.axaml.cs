@@ -1,9 +1,11 @@
+using System;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using AvoloniaSecondProject1.Data;
 using AvoloniaSecondProject1.ViewModels;
 using AvoloniaSecondProject1.Views;
 
@@ -11,6 +13,7 @@ namespace AvoloniaSecondProject1
 {
     public partial class App : Application
     {
+        public static AppDbContext DbContext { get; private set; } = new AppDbContext(); 
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);

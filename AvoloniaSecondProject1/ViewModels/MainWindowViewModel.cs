@@ -1,7 +1,15 @@
-﻿namespace AvoloniaSecondProject1.ViewModels
+﻿using System.Collections.Generic;
+using AvoloniaSecondProject1.Data;
+
+namespace AvoloniaSecondProject1.ViewModels
 {
     public partial class MainWindowViewModel : ViewModelBase
     {
-        public string Greeting { get; } = "Welcome to Avalonia!";
+       public List<User> Users { get; set; }
+
+       public MainWindowViewModel() 
+        {
+            
+        }
     }
 }
