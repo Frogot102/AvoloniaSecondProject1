@@ -1,0 +1,33 @@
+using System.Linq;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
+using AvoloniaSecondProject1.Models;
+
+namespace AvoloniaSecondProject1;
+
+public partial class createAndChangeLoginData : Window
+{
+    public createAndChangeLoginData()
+    {
+        InitializeComponent();
+        if (LoginVaribleData.selectedLoginInMainWindow == null) return;
+
+        LoginText.Text = LoginVaribleData.selectedLoginInMainWindow.Login1;
+        PasswordText.Text = LoginVaribleData.selectedLoginInMainWindow.Password;
+    }
+
+    private void Button_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        var idLogin = LoginVaribleData.selectedLoginInMainWindow.IdLogin;
+        var thisLogin = App.DbContext.Logins.FirstOrDefault(x => x.IdLogin == idLogin);
+
+        if (thisLogin == null) return;
+
+        thisLogin.Login1 = LoginText.Text;
+        thisLogin.Password = PasswordText.Text;
+
+        App.DbContext.SaveChanges();
+        this.Close();
+    }
+}

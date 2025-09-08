@@ -8,14 +8,14 @@
         Title="LoginsPage"
 		x:DataType="vm:LoginPageViewModel">
 		<Grid RowDefinitions="*, Auto">
-		<DataGrid ItemsSource="{Binding Logins}" IsReadOnly="True" Name="LoginsPageGrid" Grid.Row="0">
+		<DataGrid ItemsSource="{Binding Logins}" IsReadOnly="True" Name="LoginsPageGrid" Grid.Row="0" DoubleTapped="DataGrid_DoubleTapped">
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="Id Login" Binding="{Binding IdLogin}"/>
 				<DataGridTextColumn Header="Login" Binding="{Binding Login1}"/>
 				<DataGridTextColumn Header="Password" Binding="{Binding Password}"/>
-				<DataGridTextColumn Header="Id User"/>
+				<DataGridTextColumn Header="Id User" Binding="{Binding UserId}"/>
 			</DataGrid.Columns>
 		</DataGrid>
-		<Button Content="Добавление" Grid.Row="1"/>
+		<Button Content="Добавление" Grid.Row="1" Click="Button_Click"/>
 	</Grid>
 </Window>
