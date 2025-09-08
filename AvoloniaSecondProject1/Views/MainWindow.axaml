@@ -10,15 +10,14 @@
         Title="AvoloniaSecondProject1">
 	<Grid RowDefinitions="*, Auto">
 		<DataGrid ItemsSource="{Binding Users}" IsReadOnly="True" DoubleTapped="DataGrid_DoubleTapped" Name="MainDataGridUsers" Grid.Row="0">
-		<DataGrid.Columns>
-			<DataGridTextColumn Header="User Id" Binding="{Binding IdUser}"/>
-			<DataGridTextColumn Header="Full Name" Binding="{Binding FullName}"/>
-			<DataGridTextColumn Header="Phone Numbers" Binding="{Binding PhoneNumber}"/>
-			<DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
-		</DataGrid.Columns>
-	</DataGrid>
-	<Button Content="Добавление" Grid.Row="1" Click="Button_Click"/>
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="User Id" Binding="{Binding IdUser}"/>
+				<DataGridTextColumn Header="Full Name" Binding="{Binding FullName}"/>
+				<DataGridTextColumn Header="Phone Numbers" Binding="{Binding PhoneNumber}"/>
+				<DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+			</DataGrid.Columns>
+		</DataGrid>
+		<Button Content="Добавление" Grid.Row="1" Click="Button_Click"/>
+		<Button Content="Логины" Grid.Row="1" Margin="725 0 0 0" Click="Button_Click_1"/>
 	</Grid>
-	
-
 </Window>

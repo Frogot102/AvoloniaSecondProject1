@@ -4,5 +4,6 @@ namespace AvoloniaSecondProject1.ViewModels
 {
     public class ViewModelBase : ObservableObject
     {
+
     }
 }

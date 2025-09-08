@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using AvoloniaSecondProject1.Data;
 using AvoloniaSecondProject1.Models;
@@ -38,6 +39,12 @@ namespace AvoloniaSecondProject1.Views
 
             var viewModel = DataContext as MainWindowViewModel;
             viewModel.RefreshData();
+        }
+
+        private async void Button_Click_1(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            var loginsPageOpen = new LoginsPage();
+            await loginsPageOpen.ShowDialog(this);
         }
     }
 }
