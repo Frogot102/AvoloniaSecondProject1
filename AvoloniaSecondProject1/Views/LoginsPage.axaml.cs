@@ -24,7 +24,7 @@ public partial class LoginsPage : Window
         var createAmdChangeLogin = new createAndChangeLoginData();
         await createAmdChangeLogin.ShowDialog(this);
 
-        var viewModel = DataContext as MainWindowViewModel;
+        var viewModel = DataContext as LoginPageViewModel;
         viewModel.RefreshData();
     }
 

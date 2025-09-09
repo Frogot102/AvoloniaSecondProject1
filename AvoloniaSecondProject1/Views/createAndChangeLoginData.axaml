@@ -11,6 +11,8 @@
 		<TextBox Grid.Row="1" Name="LoginText"/>
 		<TextBlock Text="Пароль:" Grid.Row="2"/>
 		<TextBox Grid.Row="4" Name="PasswordText"/>
+		<TextBlock Text="Id Пользователя:" Grid.Row="5"/>
+		<TextBox Grid.Row="6" Name="IdLoginUserText"/>
 		<Button Name="SaveLoginButton" Grid.Row="7" Content="Save" Margin="10" Click="Button_Click"/>
 	</Grid>
 </Window>

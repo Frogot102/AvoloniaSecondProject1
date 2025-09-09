@@ -7,7 +7,7 @@ using AvoloniaSecondProject1.Data;
 
 namespace AvoloniaSecondProject1.ViewModels
 {
-    public class LoginPageViewModel : ViewModelBase
+    public partial class LoginPageViewModel : ViewModelBase
     {
         public List<Login> Logins { get; set; }
 
@@ -19,6 +19,7 @@ namespace AvoloniaSecondProject1.ViewModels
         {
             var LoginsFromDb = App.DbContext.Logins.ToList();
             Logins = LoginsFromDb;
+            OnPropertyChanged(nameof(Logins));
         }
 
     }
