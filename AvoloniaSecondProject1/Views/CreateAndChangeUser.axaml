@@ -4,15 +4,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="AvoloniaSecondProject1.CreateAndChangeUser"
+		xmlns:vm="using:AvoloniaSecondProject1.ViewModels"
+		x:DataType="vm:MainWindowViewModel"
         Title="CreateAndChangeUser">
 	
-	<Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto">
-		<TextBlock Text="ФИО:" Grid.Row="0"/>
-		<TextBox Grid.Row="1" Name="FullNameText"/>
-		<TextBlock Text="Номер телефона:" Grid.Row="2"/>
-		<TextBox Grid.Row="4" Name="PhoneNumberText"/>
-		<TextBlock Text="Описание:" Grid.Row="5" />
-		<TextBox Grid.Row="6" Name="DescriptionText"/>
-		<Button Name="SaveUserButton" Grid.Row="7" Content="Save" Margin="10" Click="Button_Click" />
+	<Grid>
+		<StackPanel Orientation="Horizontal" Margin="10">
+			<StackPanel Orientation="Vertical" Width="300">
+				<TextBlock Text="ФИО:"/>
+				<TextBox Grid.Row="1" Name="FullNameText" Margin="0 0 0 10"/>
+				<TextBlock Text="Номер телефона:"/>
+				<TextBox Grid.Row="4" Name="PhoneNumberText" Margin="0 0 0 10"/>
+				<TextBlock Text="Описание:"/>
+				<TextBox Grid.Row="6" Name="DescriptionText" Height="100"/>
+			</StackPanel>
+			<StackPanel Orientation="Vertical" Margin="30 0 0 0" Width="150">
+				<TextBlock Text="Логин:"/>
+				<TextBox Grid.Row="1" Name="LoginText" Margin="0 0 0 10"/>
+				<TextBlock Text="Пароль:"/>
+				<TextBox Grid.Row="4" Name="PasswordText" Margin="0 0 0 10"/>
+				<TextBlock Text="Роль:"/>
+				<ComboBox ItemsSource="{Binding Roles}" Width="200" Grid.Row="8" Name="ComboUsersAll">
+					<ComboBox.ItemTemplate>
+						<DataTemplate>
+							<TextBlock Text="{Binding}" FontWeight="Bold"/>
+						</DataTemplate>
+					</ComboBox.ItemTemplate>
+				</ComboBox>
+			</StackPanel>
+			<Button Name="SaveUserButton" Content="Save" Margin="10" Click="Button_Click"/>
+		</StackPanel>
+		
+		
 	</Grid>
 </Window>

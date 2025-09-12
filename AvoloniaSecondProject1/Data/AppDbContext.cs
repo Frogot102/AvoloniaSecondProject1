@@ -17,6 +17,8 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Login> Logins { get; set; }
 
+    public virtual DbSet<Role> Roles { get; set; }
+
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -41,6 +43,14 @@ public partial class AppDbContext : DbContext
                 .HasConstraintName("FK_Logins_Users");
         });
 
+        modelBuilder.Entity<Role>(entity =>
+        {
+            entity.HasKey(e => e.IdRole);
+
+            entity.Property(e => e.IdRole).HasColumnName("Id_Role");
+            entity.Property(e => e.RoleName).HasColumnType("text");
+        });
+
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.IdUser);
@@ -49,6 +59,11 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.Description).HasColumnType("text");
             entity.Property(e => e.FullName).HasColumnType("text");
             entity.Property(e => e.PhoneNumber).HasColumnType("text");
+            entity.Property(e => e.RoleId).HasColumnName("Role_Id");
+
+            entity.HasOne(d => d.Role).WithMany(p => p.Users)
+                .HasForeignKey(d => d.RoleId)
+                .HasConstraintName("FK_Users_Roles");
         });
 
         OnModelCreatingPartial(modelBuilder);

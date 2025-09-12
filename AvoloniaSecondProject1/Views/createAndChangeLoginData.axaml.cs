@@ -14,26 +14,22 @@ public partial class createAndChangeLoginData : Window
     public createAndChangeLoginData()
     {
         InitializeComponent();
+        DataContext = new MainWindowViewModel();
         if (LoginVaribleData.selectedLoginInMainWindow == null) return;
 
         LoginText.Text = LoginVaribleData.selectedLoginInMainWindow.Login1;
         PasswordText.Text = LoginVaribleData.selectedLoginInMainWindow.Password;
         IdLoginUserText.Text = Convert.ToString(LoginVaribleData.selectedLoginInMainWindow.UserId);
+        ComboUsers.SelectedItem = LoginVaribleData.selectedLoginInMainWindow.User;
     }
 
     private void Button_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
 
-        //var idLogin = LoginVaribleData.selectedLoginInMainWindow.IdLogin;
-        //var thisLogin = App.DbContext.Logins.FirstOrDefault(x => x.IdLogin == idLogin);
+        var selectedUsers = ComboUsers.SelectedItem as User;
 
-        //if (thisLogin == null) return;
+        if (selectedUsers == null) return;
 
-        //thisLogin.Login1 = LoginText.Text;
-        //thisLogin.Password = PasswordText.Text;
-
-        //App.DbContext.SaveChanges();
-        //this.Close();
         if (LoginVaribleData.selectedLoginInMainWindow != null)
         {
             var idLogin = LoginVaribleData.selectedLoginInMainWindow.IdLogin;

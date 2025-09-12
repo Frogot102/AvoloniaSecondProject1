@@ -3,7 +3,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		xmlns:vm="using:AvoloniaSecondProject1.ViewModels"
         x:Class="AvoloniaSecondProject1.createAndChangeLoginData"
+		x:DataType="vm:MainWindowViewModel"
         Title="createAndChangeLoginData">
 	
 	<Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto">
@@ -13,6 +15,13 @@
 		<TextBox Grid.Row="4" Name="PasswordText"/>
 		<TextBlock Text="Id Пользователя:" Grid.Row="5"/>
 		<TextBox Grid.Row="6" Name="IdLoginUserText"/>
+		<ComboBox ItemsSource="{Binding Users}" Width="200" Grid.Row="8" Name="ComboUsers">
+			<ComboBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding FullName}" FontWeight="Bold"/>
+				</DataTemplate>			
+			</ComboBox.ItemTemplate>
+		</ComboBox>
 		<Button Name="SaveLoginButton" Grid.Row="7" Content="Save" Margin="10" Click="Button_Click"/>
 	</Grid>
 </Window>
