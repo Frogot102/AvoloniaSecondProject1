@@ -17,26 +17,30 @@ public partial class CreateAndChangeUser : Window
 
         DataContext = new MainWindowViewModel();
 
-        if (UserVaribleData.selectedUserInMainWindow == null) return;
+        // «аполн€ем данные пользовател€ если он выбран
+        if (UserVaribleData.selectedUserInMainWindow != null)
+        {
+            FullNameText.Text = UserVaribleData.selectedUserInMainWindow.FullName;
+            PhoneNumberText.Text = UserVaribleData.selectedUserInMainWindow.PhoneNumber;
+            DescriptionText.Text = UserVaribleData.selectedUserInMainWindow.Description;
+            ComboUsersAll.SelectedItem = UserVaribleData.selectedUserInMainWindow.Role;
 
-        FullNameText.Text = UserVaribleData.selectedUserInMainWindow.FullName;
-        PhoneNumberText.Text = UserVaribleData.selectedUserInMainWindow.PhoneNumber;
-        DescriptionText.Text = UserVaribleData.selectedUserInMainWindow.Description;
+            // ѕолучаем логин и пароль дл€ выбранного пользовател€
+            var userLogin = App.DbContext.Logins.FirstOrDefault(x => x.UserId == UserVaribleData.selectedUserInMainWindow.IdUser);
 
-        if (LoginVaribleData.selectedLoginInMainWindow == null) return;
-
-        LoginText.Text = LoginVaribleData.selectedLoginInMainWindow.Login1;
-        PasswordText.Text = LoginVaribleData.selectedLoginInMainWindow.Password;
-        LoginText.Text = Convert.ToString(LoginVaribleData.selectedLoginInMainWindow.UserId);
-        ComboUsersAll.SelectedItem = UserVaribleData.selectedUserInMainWindow.Role.RoleName;
+            if (userLogin != null)
+            {
+                LoginText.Text = userLogin.Login1;
+                PasswordText.Text = userLogin.Password;
+            }
+        }
     }
 
     private void Button_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        
-
         if (UserVaribleData.selectedUserInMainWindow != null)
         {
+            // –едактирование существующего пользовател€
             var idUser = UserVaribleData.selectedUserInMainWindow.IdUser;
             var thisUser = App.DbContext.Users.FirstOrDefault(x => x.IdUser == idUser);
 
@@ -46,23 +50,17 @@ public partial class CreateAndChangeUser : Window
             thisUser.Description = DescriptionText.Text;
             thisUser.FullName = FullNameText.Text;
 
-            var selectedUsers = ComboUsersAll.SelectedItem as Role;
-
-            if (selectedUsers == null) return;
-
-            if (LoginVaribleData.selectedLoginInMainWindow != null) return;
-
-            var idLogin = LoginVaribleData.selectedLoginInMainWindow.IdLogin;
-            var thisLogin = App.DbContext.Logins.FirstOrDefault(x => x.IdLogin == idLogin);
-
-            if (thisLogin == null) return;
-
-            thisLogin.Login1 = LoginText.Text;
-            thisLogin.Password = PasswordText.Text;
-            thisLogin.UserId = Convert.ToInt32(LoginText.Text);
+            // ќбновл€ем логин и пароль
+            var userLogin = App.DbContext.Logins.FirstOrDefault(x => x.UserId == idUser);
+            if (userLogin != null)
+            {
+                userLogin.Login1 = LoginText.Text;
+                userLogin.Password = PasswordText.Text;
+            }
         }
         else
         {
+            // —оздание нового пользовател€
             var newUser = new User()
             {
                 FullName = FullNameText.Text,
@@ -70,13 +68,19 @@ public partial class CreateAndChangeUser : Window
                 PhoneNumber = PhoneNumberText.Text,
             };
             App.DbContext.Users.Add(newUser);
+
+            // —охран€ем чтобы получить ID нового пользовател€
+            App.DbContext.SaveChanges();
+
             var newLogin = new Login()
             {
                 Login1 = LoginText.Text,
                 Password = PasswordText.Text,
+                UserId = newUser.IdUser // —в€зываем логин с пользователем
             };
             App.DbContext.Logins.Add(newLogin);
-        }     
+        }
+
         App.DbContext.SaveChanges();
         this.Close();
     }
