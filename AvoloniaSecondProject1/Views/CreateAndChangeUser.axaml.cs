@@ -17,7 +17,6 @@ public partial class CreateAndChangeUser : Window
 
         DataContext = new MainWindowViewModel();
 
-        // «аполн€ем данные пользовател€ если он выбран
         if (UserVaribleData.selectedUserInMainWindow != null)
         {
             FullNameText.Text = UserVaribleData.selectedUserInMainWindow.FullName;
@@ -25,7 +24,7 @@ public partial class CreateAndChangeUser : Window
             DescriptionText.Text = UserVaribleData.selectedUserInMainWindow.Description;
             ComboUsersAll.SelectedItem = UserVaribleData.selectedUserInMainWindow.Role;
 
-            // ѕолучаем логин и пароль дл€ выбранного пользовател€
+
             var userLogin = App.DbContext.Logins.FirstOrDefault(x => x.UserId == UserVaribleData.selectedUserInMainWindow.IdUser);
 
             if (userLogin != null)
@@ -40,7 +39,6 @@ public partial class CreateAndChangeUser : Window
     {
         if (UserVaribleData.selectedUserInMainWindow != null)
         {
-            // –едактирование существующего пользовател€
             var idUser = UserVaribleData.selectedUserInMainWindow.IdUser;
             var thisUser = App.DbContext.Users.FirstOrDefault(x => x.IdUser == idUser);
 
@@ -49,8 +47,8 @@ public partial class CreateAndChangeUser : Window
             thisUser.PhoneNumber = PhoneNumberText.Text;
             thisUser.Description = DescriptionText.Text;
             thisUser.FullName = FullNameText.Text;
+            thisUser.Role = ComboUsersAll.SelectedItem as Role;
 
-            // ќбновл€ем логин и пароль
             var userLogin = App.DbContext.Logins.FirstOrDefault(x => x.UserId == idUser);
             if (userLogin != null)
             {
@@ -60,23 +58,22 @@ public partial class CreateAndChangeUser : Window
         }
         else
         {
-            // —оздание нового пользовател€
             var newUser = new User()
             {
                 FullName = FullNameText.Text,
                 Description = DescriptionText.Text,
                 PhoneNumber = PhoneNumberText.Text,
+                Role = ComboUsersAll.SelectedItem as Role
             };
             App.DbContext.Users.Add(newUser);
 
-            // —охран€ем чтобы получить ID нового пользовател€
             App.DbContext.SaveChanges();
 
             var newLogin = new Login()
             {
                 Login1 = LoginText.Text,
                 Password = PasswordText.Text,
-                UserId = newUser.IdUser // —в€зываем логин с пользователем
+                UserId = newUser.IdUser
             };
             App.DbContext.Logins.Add(newLogin);
         }
