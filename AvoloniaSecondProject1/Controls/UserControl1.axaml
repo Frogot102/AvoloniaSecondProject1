@@ -1,0 +1,21 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="using:AvoloniaSecondProject1.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="AvoloniaSecondProject1.UserControl1"
+			 x:DataType="vm:MainWindowViewModel">
+	<Grid RowDefinitions="*, Auto">
+		<DataGrid ItemsSource="{Binding Users}" IsReadOnly="True" DoubleTapped="DataGrid_DoubleTapped" Name="MainDataGridUsers" Grid.Row="0">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="User Id" Binding="{Binding IdUser}"/>
+				<DataGridTextColumn Header="Full Name" Binding="{Binding FullName}"/>
+				<DataGridTextColumn Header="Phone Numbers" Binding="{Binding PhoneNumber}"/>
+				<DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+			</DataGrid.Columns>
+		</DataGrid>
+		<Button Content="Добавление" Grid.Row="1" Click="Button_Click"/>
+		<Button Content="Логины" Grid.Row="1" Margin="725 0 0 0" Click="Button_Click_1"/>
+	</Grid>
+</UserControl>

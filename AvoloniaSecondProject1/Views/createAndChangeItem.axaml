@@ -1,0 +1,26 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:vm="using:AvoloniaSecondProject1.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="325" d:DesignHeight="350"
+        x:Class="AvoloniaSecondProject1.createAndChangeItem"
+        Title="createAndChangeItem"
+		x:DataType="vm:MainWindowViewModel">
+	<Grid>
+		<StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+			<StackPanel Orientation="Vertical" Width="300">
+				<TextBlock Text="Название продукта:"/>
+				<TextBox Grid.Row="1" Name="ItemNameText" Margin="0 0 0 10"/>
+				<TextBlock Text="Описание продукта:"/>
+				<TextBox Grid.Row="4" Name="ItemDescText" Margin="0 0 0 10" Height="100"/>
+				<TextBlock Text="Цена (Руб):"/>
+				<TextBox Grid.Row="6" Name="ItemCostText"/>
+				<Button Name="SaveUserButton" Content="Save" Margin="10" Width="150" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Background="Orange" FontWeight="Heavy" Click="Button_Click_Save"/>
+			</StackPanel>
+			
+		</StackPanel>
+
+
+	</Grid>
+</Window>

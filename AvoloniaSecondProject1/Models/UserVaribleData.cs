@@ -10,5 +10,7 @@ namespace AvoloniaSecondProject1.Models
     static class UserVaribleData
     {
         public static User selectedUserInMainWindow { get; set; }
+        public static Item selectedItemInMainWindow { get; set; }
+        public static Bascket selectedBacketInMainWindow { get; set; }
     }
 }

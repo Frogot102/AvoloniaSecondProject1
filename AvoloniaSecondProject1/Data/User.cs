@@ -15,6 +15,8 @@ public partial class User
 
     public int? RoleId { get; set; }
 
+    public virtual ICollection<Bascket> Basckets { get; set; } = new List<Bascket>();
+
     public virtual ICollection<Login> Logins { get; set; } = new List<Login>();
 
     public virtual Role? Role { get; set; }

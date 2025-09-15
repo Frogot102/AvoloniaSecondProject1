@@ -14,7 +14,6 @@ public partial class CreateAndChangeUser : Window
     public CreateAndChangeUser()
     {
         InitializeComponent();
-
         DataContext = new MainWindowViewModel();
 
         if (UserVaribleData.selectedUserInMainWindow != null)

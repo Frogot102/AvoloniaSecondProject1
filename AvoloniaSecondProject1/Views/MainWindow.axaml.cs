@@ -11,40 +11,22 @@ namespace AvoloniaSecondProject1.Views
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel();
+            MainControl.Content = new UserControl1();
+        }
+       
+        private void Button_Click_Users(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            MainControl.Content = new UserControl1();
         }
 
-        private async void DataGrid_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs e)
+        private void Button_Click_Items(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            var selectedUser = MainDataGridUsers.SelectedItem as User;
-
-            if (selectedUser == null) return;
-
-            UserVaribleData.selectedUserInMainWindow = selectedUser;
-
-            var createAndChangeUserWindow = new CreateAndChangeUser();
-            await createAndChangeUserWindow.ShowDialog(this);
-
-            var viewModel = DataContext as MainWindowViewModel;
-            viewModel.RefreshData();
-
+            MainControl.Content = new ItemControl();
         }
 
-        private async void Button_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        private void Button_Click_Basket(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            UserVaribleData.selectedUserInMainWindow = null;
-
-            var createAndChangeUserWindow = new CreateAndChangeUser();
-            await createAndChangeUserWindow.ShowDialog(this);
-
-            var viewModel = DataContext as MainWindowViewModel;
-            viewModel.RefreshData();
-        }
-
-        private async void Button_Click_1(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-        {
-            var loginsPageOpen = new LoginsPage();
-            await loginsPageOpen.ShowDialog(this);
+            MainControl.Content = new BasketCOntrol();
         }
     }
 }

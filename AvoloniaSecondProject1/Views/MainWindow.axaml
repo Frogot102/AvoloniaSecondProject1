@@ -8,16 +8,16 @@
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="AvoloniaSecondProject1">
-	<Grid RowDefinitions="*, Auto">
-		<DataGrid ItemsSource="{Binding Users}" IsReadOnly="True" DoubleTapped="DataGrid_DoubleTapped" Name="MainDataGridUsers" Grid.Row="0">
-			<DataGrid.Columns>
-				<DataGridTextColumn Header="User Id" Binding="{Binding IdUser}"/>
-				<DataGridTextColumn Header="Full Name" Binding="{Binding FullName}"/>
-				<DataGridTextColumn Header="Phone Numbers" Binding="{Binding PhoneNumber}"/>
-				<DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
-			</DataGrid.Columns>
-		</DataGrid>
-		<Button Content="Добавление" Grid.Row="1" Click="Button_Click"/>
-		<Button Content="Логины" Grid.Row="1" Margin="725 0 0 0" Click="Button_Click_1"/>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="10" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+			<Button Content="Users" Click="Button_Click_Users" Width="150" HorizontalContentAlignment="Center" Background="Orange" FontWeight="Heavy"/>
+			<Button Content="Items" Click="Button_Click_Items" Width="150" HorizontalContentAlignment="Center" Background="LightGreen" FontWeight="Heavy"/>
+			<Button Content="Basket" Click="Button_Click_Basket" Width="150" HorizontalContentAlignment="Center" Background="LightSkyBlue" FontWeight="Heavy"/>
+		</StackPanel>
+		<ContentControl	 Grid.Row="1" x:Name="MainControl"/>
 	</Grid>
 </Window>

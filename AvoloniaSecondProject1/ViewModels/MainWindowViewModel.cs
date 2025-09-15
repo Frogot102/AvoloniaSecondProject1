@@ -9,6 +9,8 @@ namespace AvoloniaSecondProject1.ViewModels
        public List<User> Users { get; set; }
        public List<Login> Logins { get; set; }
        public List<Role> Roles { get; set; }
+       public List<Item> Items {  get; set; }
+       public List<Bascket> Basckets { get; set; }
 
         public MainWindowViewModel() 
         {
@@ -23,9 +25,16 @@ namespace AvoloniaSecondProject1.ViewModels
             Logins = LoginsFromDb;
             var RolesFromDb = App.DbContext.Roles.ToList();
             Roles = RolesFromDb;
+            var ItemsFromDb = App.DbContext.Items.ToList();
+            Items = ItemsFromDb;
+            var BasketsFromDb = App.DbContext.Basckets.ToList();
+            Basckets = BasketsFromDb;
+
             OnPropertyChanged(nameof(Users));
             OnPropertyChanged(nameof(Logins));
             OnPropertyChanged(nameof(Roles));
+            OnPropertyChanged(nameof(Items));
+            OnPropertyChanged(nameof(Basckets));
         }
 
     }

@@ -15,6 +15,10 @@ public partial class AppDbContext : DbContext
     {
     }
 
+    public virtual DbSet<Bascket> Basckets { get; set; }
+
+    public virtual DbSet<Item> Items { get; set; }
+
     public virtual DbSet<Login> Logins { get; set; }
 
     public virtual DbSet<Role> Roles { get; set; }
@@ -27,6 +31,36 @@ public partial class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Bascket>(entity =>
+        {
+            entity.HasKey(e => e.IdBacket);
+
+            entity.ToTable("Bascket");
+
+            entity.Property(e => e.IdBacket).HasColumnName("Id_Backet");
+            entity.Property(e => e.Count).HasColumnType("text");
+            entity.Property(e => e.IdItem).HasColumnName("Id_Item");
+            entity.Property(e => e.IdUser).HasColumnName("Id_User");
+
+            entity.HasOne(d => d.IdItemNavigation).WithMany(p => p.Basckets)
+                .HasForeignKey(d => d.IdItem)
+                .HasConstraintName("FK_Bascket_Items");
+
+            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.Basckets)
+                .HasForeignKey(d => d.IdUser)
+                .HasConstraintName("FK_Bascket_Users");
+        });
+
+        modelBuilder.Entity<Item>(entity =>
+        {
+            entity.HasKey(e => e.IdItem);
+
+            entity.Property(e => e.IdItem).HasColumnName("Id_Item");
+            entity.Property(e => e.Cost).HasColumnType("text");
+            entity.Property(e => e.Description).HasColumnType("text");
+            entity.Property(e => e.ItemName).HasColumnType("text");
+        });
+
         modelBuilder.Entity<Login>(entity =>
         {
             entity.HasKey(e => e.IdLogin);
