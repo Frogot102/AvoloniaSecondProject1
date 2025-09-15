@@ -10,4 +10,12 @@ public partial class BasketCOntrol : UserControl
     {
         InitializeComponent();
     }
+
+    private void Button_Click_Add(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+    }
+
+    private void DataGrid_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs e)
+    {
+    }
 }
