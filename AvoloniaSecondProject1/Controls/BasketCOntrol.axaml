@@ -9,10 +9,9 @@
 	<Grid RowDefinitions="*, Auto">
 		<DataGrid ItemsSource="{Binding Basckets}" IsReadOnly="True" Name="MainDataGridUsers" Grid.Row="0" DoubleTapped="DataGrid_DoubleTapped">
 			<DataGrid.Columns>
-				<DataGridTextColumn Header="Item Id"/>
-				<DataGridTextColumn Header="Item Name"/>
-				<DataGridTextColumn Header="Item Description"/>
-				<DataGridTextColumn Header="Cost"/>
+				<DataGridTextColumn Header="User Id" Binding="{Binding IdUser}"/>
+				<DataGridTextColumn Header="Item Id" Binding="{Binding IdItem}"/>
+				<DataGridTextColumn Header="Count" Binding="{Binding Count}"/>
 			</DataGrid.Columns>
 		</DataGrid>
 		<Button Content="Добавление" Grid.Row="1" Click="Button_Click_Add"/>

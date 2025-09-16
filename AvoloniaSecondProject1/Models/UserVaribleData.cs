@@ -12,5 +12,6 @@ namespace AvoloniaSecondProject1.Models
         public static User selectedUserInMainWindow { get; set; }
         public static Item selectedItemInMainWindow { get; set; }
         public static Bascket selectedBacketInMainWindow { get; set; }
+        public static Login selectedLoginInMainWindow { get; set; }
     }
 }
