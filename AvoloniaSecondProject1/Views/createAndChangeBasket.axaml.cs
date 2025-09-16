@@ -18,9 +18,8 @@ public partial class createAndChangeBasket : Window
 
         if (UserVaribleData.selectedBacketInMainWindow != null)
         {
-
-            var selectedUser = App.DbContext.Users.FirstOrDefault(x => x.IdUser == UserVaribleData.selectedBacketInMainWindow.IdUser);
-            var selectedItem = App.DbContext.Items.FirstOrDefault(z => z.IdItem == UserVaribleData.selectedBacketInMainWindow.IdItem);
+            var selectedUser = App.DbContext.Users.FirstOrDefault(u => u.IdUser == UserVaribleData.selectedBacketInMainWindow.IdUserNavigation.IdUser);
+            var selectedItem = App.DbContext.Items.FirstOrDefault(i => i.IdItem == UserVaribleData.selectedBacketInMainWindow.IdItemNavigation.IdItem);
 
             ComboUsersAll.SelectedItem = selectedUser;
             ComboItemsAll.SelectedItem = selectedItem;
@@ -31,7 +30,7 @@ public partial class createAndChangeBasket : Window
     private void Button_Click_Save(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         if (ComboItemsAll.SelectedItem == null || ComboUsersAll.SelectedItem == null || string.IsNullOrEmpty(ItemCountText.Text)) return;
-
+        if (!ItemCountText.Text.All(char.IsDigit)) return;
 
         if (UserVaribleData.selectedBacketInMainWindow != null)
         {

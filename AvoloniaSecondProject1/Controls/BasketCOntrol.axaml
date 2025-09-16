@@ -9,8 +9,8 @@
 	<Grid RowDefinitions="*, Auto">
 		<DataGrid ItemsSource="{Binding Basckets}" IsReadOnly="True" Name="MainDataGridUsers" Grid.Row="0" DoubleTapped="DataGrid_DoubleTapped">
 			<DataGrid.Columns>
-				<DataGridTextColumn Header="User Id" Binding="{Binding IdUser}"/>
-				<DataGridTextColumn Header="Item Id" Binding="{Binding IdItem}"/>
+				<DataGridTextColumn Header="User Id" Binding="{Binding IdUserNavigation.FullName}"/>
+				<DataGridTextColumn Header="Item Id" Binding="{Binding IdItemNavigation.ItemName}"/>
 				<DataGridTextColumn Header="Count" Binding="{Binding Count}"/>
 			</DataGrid.Columns>
 		</DataGrid>
