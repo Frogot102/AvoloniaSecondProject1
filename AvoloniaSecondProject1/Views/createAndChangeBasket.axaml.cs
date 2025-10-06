@@ -18,13 +18,13 @@ public partial class createAndChangeBasket : Window
 
         if (UserVaribleData.selectedBacketInMainWindow != null)
         {
-            var selectedUser = App.DbContext.Users.FirstOrDefault(u => u.IdUser == UserVaribleData.selectedBacketInMainWindow.IdUserNavigation.IdUser);
-            var selectedItem = App.DbContext.Items.FirstOrDefault(i => i.IdItem == UserVaribleData.selectedBacketInMainWindow.IdItemNavigation.IdItem);
-
-            ComboUsersAll.SelectedItem = selectedUser;
-            ComboItemsAll.SelectedItem = selectedItem;
-            ItemCountText.Text = UserVaribleData.selectedBacketInMainWindow.Count.ToString();
+            DataContext = UserVaribleData.selectedBacketInMainWindow;
         }
+        else
+            DataContext = new Bascket()
+            {
+                Count = "1"
+            };
     }
 
     private void Button_Click_Save(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
@@ -32,27 +32,15 @@ public partial class createAndChangeBasket : Window
         if (ComboItemsAll.SelectedItem == null || ComboUsersAll.SelectedItem == null || string.IsNullOrEmpty(ItemCountText.Text)) return;
         if (!ItemCountText.Text.All(char.IsDigit)) return;
 
+        var basket = DataContext as Bascket;
+
         if (UserVaribleData.selectedBacketInMainWindow != null)
         {
-            var idBasket = UserVaribleData.selectedBacketInMainWindow.IdBacket;
-            var thisBasket = App.DbContext.Basckets.FirstOrDefault(x => x.IdBacket == idBasket);
-
-            if (thisBasket == null) return;
-
-            thisBasket.IdUser = ((User)ComboUsersAll.SelectedItem).IdUser;
-            thisBasket.IdItem = ((Item)ComboItemsAll.SelectedItem).IdItem;
-
+            App.DbContext.Update(basket);
         }
         else
-        {
-            var newBasket = new Bascket
-            {
-                IdUser = ((User)ComboUsersAll.SelectedItem).IdUser,
-                IdItem = ((Item)ComboItemsAll.SelectedItem).IdItem,
-                Count = ItemCountText.Text
-            };
-
-            App.DbContext.Basckets.Add(newBasket);
+        { 
+            App.DbContext.Basckets.Add(basket);
         }
 
         App.DbContext.SaveChanges();

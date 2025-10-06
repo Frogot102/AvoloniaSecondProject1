@@ -1,3 +1,4 @@
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
@@ -12,7 +13,7 @@ public partial class UserControl1 : UserControl
     public UserControl1()
     {
         InitializeComponent();
-        DataContext = new MainWindowViewModel();
+        MainDataGridUsers.ItemsSource = App.DbContext.Users.ToList();
     }
     private async void DataGrid_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs e)
     {
@@ -27,8 +28,7 @@ public partial class UserControl1 : UserControl
         var createAndChangeUserWindow = new CreateAndChangeUser();
         await createAndChangeUserWindow.ShowDialog(parent);
 
-        var viewModel = DataContext as MainWindowViewModel;
-        viewModel.RefreshData();
+        MainDataGridUsers.ItemsSource = App.DbContext.Users.ToList();
 
     }
 
@@ -41,8 +41,7 @@ public partial class UserControl1 : UserControl
 
         await createAndChangeUserWindow.ShowDialog(parent);
 
-        var viewModel = DataContext as MainWindowViewModel;
-        viewModel.RefreshData();
+        MainDataGridUsers.ItemsSource = App.DbContext.Users.ToList();
     }
 
     private async void Button_Click_1(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
@@ -51,5 +50,6 @@ public partial class UserControl1 : UserControl
         var parent = this.VisualRoot as Window;
 
         await loginsPageOpen.ShowDialog(parent);
+        MainDataGridUsers.ItemsSource = App.DbContext.Users.ToList();
     }
 }

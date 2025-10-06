@@ -11,7 +11,7 @@
 		<StackPanel Orientation="Vertical" Margin="10" HorizontalAlignment="Center">
 			
 				<TextBlock Text="Пользователь:"/>
-				<ComboBox ItemsSource="{Binding Users}" Width="200" Grid.Row="8" Name="ComboUsersAll">
+				<ComboBox Width="200" Grid.Row="8" Name="ComboUsersAll" SelectedItem="{Binding IdUserNavigation}">
 					<ComboBox.ItemTemplate>
 						<DataTemplate>
 							<TextBlock Text="{Binding FullName}" FontWeight="Bold"/>
@@ -19,7 +19,7 @@
 					</ComboBox.ItemTemplate>
 				</ComboBox>
 				<TextBlock Text="Продукт:" Margin="0 10 0 0"/>
-				<ComboBox ItemsSource="{Binding Items}" Width="200" Grid.Row="8" Name="ComboItemsAll">
+				<ComboBox Width="200" Grid.Row="8" Name="ComboItemsAll" SelectedItem="{Binding IdItemNavigation}">
 					<ComboBox.ItemTemplate>
 						<DataTemplate>
 							<TextBlock Text="{Binding ItemName}" FontWeight="Bold"/>
@@ -27,7 +27,7 @@
 					</ComboBox.ItemTemplate>
 				</ComboBox>
 				<TextBlock Text="Количество (Штук):" Margin="0 10 0 0"/>
-				<TextBox Grid.Row="6" Name="ItemCountText"/>
+				<TextBox Grid.Row="6" Name="ItemCountText" Text="{Binding Count}"/>
 				<Button Name="SaveUserButton" Content="Save" Margin="10" Width="150" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Background="Orange" FontWeight="Heavy" Click="Button_Click_Save"/>
 		</StackPanel>
 	</Grid>

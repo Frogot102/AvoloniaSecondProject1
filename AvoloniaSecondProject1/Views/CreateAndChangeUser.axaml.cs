@@ -11,50 +11,83 @@ namespace AvoloniaSecondProject1;
 
 public partial class CreateAndChangeUser : Window
 {
+    private User _currentUser;
+    private Login _currentLogin;
+    private bool _isEditMode;
+
     public CreateAndChangeUser()
     {
         InitializeComponent();
-        DataContext = new MainWindowViewModel();
+
+        var formData = new
+        {
+            Roles = App.DbContext.Roles.ToList()
+        };
+
+
+        this.DataContext = formData;
 
         if (UserVaribleData.selectedUserInMainWindow != null)
         {
-            FullNameText.Text = UserVaribleData.selectedUserInMainWindow.FullName;
-            PhoneNumberText.Text = UserVaribleData.selectedUserInMainWindow.PhoneNumber;
-            DescriptionText.Text = UserVaribleData.selectedUserInMainWindow.Description;
-            ComboUsersAll.SelectedItem = UserVaribleData.selectedUserInMainWindow.Role;
+ 
+            _isEditMode = true;
+            _currentUser = UserVaribleData.selectedUserInMainWindow;
+
+ 
+            FullNameText.Text = _currentUser.FullName;
+            PhoneNumberText.Text = _currentUser.PhoneNumber;
+            DescriptionText.Text = _currentUser.Description;
 
 
-            var userLogin = App.DbContext.Logins.FirstOrDefault(x => x.UserId == UserVaribleData.selectedUserInMainWindow.IdUser);
+            ComboUsersAll.SelectedItem = _currentUser.Role;
 
-            if (userLogin != null)
+
+            _currentLogin = App.DbContext.Logins.FirstOrDefault(x => x.UserId == _currentUser.IdUser);
+            if (_currentLogin != null)
             {
-                LoginText.Text = userLogin.Login1;
-                PasswordText.Text = userLogin.Password;
+                LoginText.Text = _currentLogin.Login1;
+                PasswordText.Text = _currentLogin.Password;
             }
+        }
+        else
+        {
+
+            _isEditMode = false;
+            _currentUser = new User();
+            _currentLogin = new Login();
+
+            ComboUsersAll.SelectedIndex = 0;
         }
     }
 
     private void Button_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        if (string.IsNullOrEmpty(FullNameText.Text) || string.IsNullOrEmpty(DescriptionText.Text) || string.IsNullOrEmpty(PhoneNumberText.Text) || ComboUsersAll.SelectedItem == null || string.IsNullOrEmpty(LoginText.Text) || string.IsNullOrEmpty(PasswordText.Text)) return;
 
-            if (UserVaribleData.selectedUserInMainWindow != null)
+        if (string.IsNullOrEmpty(FullNameText.Text) ||
+            string.IsNullOrEmpty(DescriptionText.Text) ||
+            string.IsNullOrEmpty(PhoneNumberText.Text) ||
+            ComboUsersAll.SelectedItem == null ||
+            string.IsNullOrEmpty(LoginText.Text) ||
+            string.IsNullOrEmpty(PasswordText.Text))
+        {
+            return;
+        }
+
+        try
+        {
+            if (_isEditMode)
             {
-                var idUser = UserVaribleData.selectedUserInMainWindow.IdUser;
-                var thisUser = App.DbContext.Users.FirstOrDefault(x => x.IdUser == idUser);
-
-                if (thisUser == null) return;
-
-                thisUser.PhoneNumber = PhoneNumberText.Text;
-                thisUser.Description = DescriptionText.Text;
-                thisUser.FullName = FullNameText.Text;
-                thisUser.Role = ComboUsersAll.SelectedItem as Role;
-
-                if (thisUser.Role != null && thisUser.FullName != null && thisUser.Description != null) return;
+ 
+                var existingUser = App.DbContext.Users.FirstOrDefault(x => x.IdUser == _currentUser.IdUser);
+                if (existingUser == null) return;
 
 
+                existingUser.FullName = FullNameText.Text;
+                existingUser.PhoneNumber = PhoneNumberText.Text;
+                existingUser.Description = DescriptionText.Text;
+                existingUser.Role = ComboUsersAll.SelectedItem as Role;
 
-                var userLogin = App.DbContext.Logins.FirstOrDefault(x => x.UserId == idUser);
+                var userLogin = App.DbContext.Logins.FirstOrDefault(x => x.UserId == _currentUser.IdUser);
                 if (userLogin != null)
                 {
                     userLogin.Login1 = LoginText.Text;
@@ -63,16 +96,16 @@ public partial class CreateAndChangeUser : Window
             }
             else
             {
+
                 var newUser = new User()
                 {
                     FullName = FullNameText.Text,
-                    Description = DescriptionText.Text,
                     PhoneNumber = PhoneNumberText.Text,
+                    Description = DescriptionText.Text,
                     Role = ComboUsersAll.SelectedItem as Role
                 };
 
                 App.DbContext.Users.Add(newUser);
-
                 App.DbContext.SaveChanges();
 
                 var newLogin = new Login()
@@ -83,10 +116,15 @@ public partial class CreateAndChangeUser : Window
                 };
 
                 App.DbContext.Logins.Add(newLogin);
-
             }
 
             App.DbContext.SaveChanges();
             this.Close();
         }
+        catch (Exception ex)
+        {
+            // Обработка ошибок
+            Console.WriteLine($"Ошибка при сохранении: {ex.Message}");
+        }
     }
+}

@@ -1,3 +1,4 @@
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
@@ -12,6 +13,7 @@ public partial class BasketCOntrol : UserControl
     public BasketCOntrol()
     {
         InitializeComponent();
+        MainDataGridUsers.ItemsSource = App.DbContext.Basckets.ToList();
     }
 
     private async void Button_Click_Add(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
@@ -23,8 +25,7 @@ public partial class BasketCOntrol : UserControl
 
         await createAndChangeBasket.ShowDialog(parent);
 
-        var viewModel = DataContext as MainWindowViewModel;
-        viewModel.RefreshData();
+        MainDataGridUsers.ItemsSource = App.DbContext.Basckets.ToList();
     }
 
     private async void DataGrid_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs e)
@@ -40,7 +41,6 @@ public partial class BasketCOntrol : UserControl
         var createAndChangeBasket = new createAndChangeBasket();
         await createAndChangeBasket.ShowDialog(parent);
 
-        var viewModel = DataContext as MainWindowViewModel;
-        viewModel.RefreshData();
+        MainDataGridUsers.ItemsSource = App.DbContext.Basckets.ToList();
     }
 }

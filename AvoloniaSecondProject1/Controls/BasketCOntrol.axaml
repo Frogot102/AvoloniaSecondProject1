@@ -2,12 +2,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 xmlns:vm="using:AvoloniaSecondProject1.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="AvoloniaSecondProject1.BasketCOntrol"
-			 x:DataType="vm:MainWindowViewModel">
+             x:Class="AvoloniaSecondProject1.BasketCOntrol">
 	<Grid RowDefinitions="*, Auto">
-		<DataGrid ItemsSource="{Binding Basckets}" IsReadOnly="True" Name="MainDataGridUsers" Grid.Row="0" DoubleTapped="DataGrid_DoubleTapped">
+		<DataGrid IsReadOnly="True" Name="MainDataGridUsers" Grid.Row="0" DoubleTapped="DataGrid_DoubleTapped">
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="User Id" Binding="{Binding IdUserNavigation.FullName}"/>
 				<DataGridTextColumn Header="Item Id" Binding="{Binding IdItemNavigation.ItemName}"/>
